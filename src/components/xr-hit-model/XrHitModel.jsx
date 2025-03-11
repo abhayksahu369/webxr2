@@ -6,7 +6,7 @@ import Model from "./Model";
 
 const XrHitModel = () => {
   const reticleRef = useRef();
-  const modelRef=useRef();
+  // const modelRef=useRef();
   const [models, setModels] = useState([]);
   
   useFrame((state, delta) => {
@@ -58,7 +58,7 @@ const XrHitModel = () => {
       )}
 
       {!isPresenting &&  (
-            <mesh ref={modelRef}>
+            <mesh >
             <Model scale={0.08} />;
           </mesh>
           )}
