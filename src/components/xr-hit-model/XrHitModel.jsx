@@ -35,7 +35,10 @@ const XrHitModel = () => {
   return (
     <>
       <OrbitControls />
-      <ambientLight />
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[5, 5, 5]} intensity={2} />
+      <directionalLight position={[-5, -5, 5]} intensity={1.5} />
+      <pointLight position={[0, 2, 2]} intensity={1.5} />
       {isPresenting &&
         models.map(({ position, id }) => {
           return <Model key={id} position={position} />;
@@ -49,7 +52,7 @@ const XrHitModel = () => {
         </Interactive>
       )}
 
-      {!isPresenting && <Model />}
+      {!isPresenting && <Model scale={0.3} position={[0, -1, -10]} />}
     </>
   );
 };
