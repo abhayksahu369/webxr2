@@ -9,9 +9,9 @@ const XrHitModel = () => {
   // const modelRef=useRef();
   const [models, setModels] = useState([]);
   
-  useFrame((state, delta) => {
-    modelRef.current.rotation.y += delta;
-  });
+  // useFrame((state, delta) => {
+  //   modelRef.current.rotation.y += delta;
+  // });
 
   const { isPresenting } = useXR();
 
