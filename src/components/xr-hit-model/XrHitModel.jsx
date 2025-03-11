@@ -46,7 +46,11 @@ const XrHitModel = () => {
       <pointLight position={[0, 2, 2]} intensity={1.5} />
       {isPresenting &&
         models.map(({ position, id }) => {
-          return <Model scale={0.05} key={id} position={position}  />;
+          return (
+            <mesh>
+                <Model scale={0.05} key={id} position={position}  />;
+            </mesh>
+          )
         })}
       {isPresenting && (
         <Interactive onSelect={placeModel}>
