@@ -1,12 +1,17 @@
 import { OrbitControls } from "@react-three/drei";
-import { useThree } from "@react-three/fiber";
+import { useThree,useFrame } from "@react-three/fiber";
 import { Interactive, useHitTest, useXR } from "@react-three/xr";
 import { useRef, useState } from "react";
 import Model from "./Model";
 
 const XrHitModel = () => {
   const reticleRef = useRef();
+  const modelRef=useRef();
   const [models, setModels] = useState([]);
+  
+  useFrame((state, delta) => {
+    modelRef.current.rotation.y += delta;
+  });
 
   const { isPresenting } = useXR();
 
@@ -41,7 +46,11 @@ const XrHitModel = () => {
       <pointLight position={[0, 2, 2]} intensity={1.5} />
       {isPresenting &&
         models.map(({ position, id }) => {
-          return <Model scale={0.08} key={id} position={position} />;
+          return (
+            <mesh ref={modelRef}>
+            <Model scale={0.05} key={id} position={position}  />;
+          </mesh>
+          )
         })}
       {isPresenting && (
         <Interactive onSelect={placeModel}>
@@ -52,7 +61,11 @@ const XrHitModel = () => {
         </Interactive>
       )}
 
-      {!isPresenting && <Model scale={0.3} position={[0, -1, -10]} />}
+      {!isPresenting &&  (
+            <mesh ref={modelRef}>
+            <Model scale={0.08} />;
+          </mesh>
+          )}
     </>
   );
 };
